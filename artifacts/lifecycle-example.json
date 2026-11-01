@@ -1,0 +1,542 @@
+{
+  "synthetic": true,
+  "official_program_calibration": false,
+  "currency": "USDC",
+  "scope": {
+    "asset": "Wallet Extension / synthetic fixture",
+    "policy_version": "SYNTHETIC-PUBLIC-1.3"
+  },
+  "weights": {
+    "extent": "1",
+    "reliability": "1"
+  },
+  "band": {
+    "minimum": "4500.00",
+    "maximum": "50000.00"
+  },
+  "states": [
+    {
+      "stage": "Estimated Bounty",
+      "basis": "researcher_declared",
+      "facts_validated": false,
+      "E": 4,
+      "D": 0,
+      "O": 0,
+      "X": 1,
+      "bemix_score": 17,
+      "policy_category": "Critical",
+      "extent": "0.6",
+      "reliability": "0.8",
+      "Q": "7/10",
+      "amount": "36350.00"
+    },
+    {
+      "stage": "Validated Bounty",
+      "basis": "synthetic_triager_correction",
+      "facts_validated": "assumed_for_example",
+      "bemix_score": 17,
+      "policy_category": "Critical",
+      "extent": "0.6",
+      "reliability": "0.6",
+      "Q": "3/5",
+      "amount": "31800.00",
+      "reason": "Reliability corrected from 0.8 to 0.6"
+    },
+    {
+      "stage": "Final Award",
+      "basis": "synthetic_program_confirmation",
+      "calculated_bounty": "31800.00",
+      "adjustment": "500.00",
+      "adjustment_rule": "example-quality-adjustment",
+      "amount": "32300.00",
+      "bemix_score_unchanged": 17,
+      "payment_executed": false
+    }
+  ],
+  "reproduction_inputs": {
+    "policy": {
+      "asset": "Wallet Extension / synthetic fixture",
+      "bands": {
+        "Critical": [
+          450000,
+          5000000
+        ],
+        "High": [
+          200000,
+          450000
+        ],
+        "Low": [
+          10000,
+          30000
+        ],
+        "Medium": [
+          30000,
+          150000
+        ]
+      },
+      "caps": [
+        {
+          "amount": 4090000,
+          "id": "EXPERIMENT-only-top-cap",
+          "mode": "unless_all",
+          "profiles": [],
+          "severities": [
+            "Critical"
+          ],
+          "when": {
+            "all_protocols_covered": true,
+            "fully_reliable": true,
+            "no_effective_mitigation": true,
+            "no_user_interaction": true
+          }
+        },
+        {
+          "amount": 3400000,
+          "id": "EXPERIMENT-only-global-34000",
+          "mode": "when_matches",
+          "profiles": [],
+          "severities": [
+            "Critical"
+          ],
+          "when": {
+            "global_limit_example": true
+          }
+        },
+        {
+          "amount": 2500000,
+          "id": "EXPERIMENT-only-profile-25000",
+          "mode": "when_matches",
+          "profiles": [
+            "primary"
+          ],
+          "severities": [
+            "Critical"
+          ],
+          "when": {
+            "profile_limit_example": true
+          }
+        }
+      ],
+      "currency": "USDC",
+      "experimental": true,
+      "favorable_facts": {
+        "all_protocols_covered": true,
+        "combination_validated": true,
+        "fully_reliable": true,
+        "global_limit_example": false,
+        "key_exfiltration": true,
+        "no_effective_mitigation": true,
+        "no_user_interaction": true,
+        "profile_limit_example": false,
+        "restricted_keys": false,
+        "restricted_path": false,
+        "silent_signing": true,
+        "unauthorized_fund_effect": true
+      },
+      "importance_influence": "1/5",
+      "importance_ranges": {
+        "Critical": [
+          8,
+          10
+        ],
+        "High": [
+          5,
+          7
+        ],
+        "Low": [
+          1,
+          2
+        ],
+        "Medium": [
+          3,
+          4
+        ]
+      },
+      "precedence": [
+        [
+          "funds",
+          "induction"
+        ],
+        [
+          "restricted-funds",
+          "induction"
+        ],
+        [
+          "silent",
+          "induction"
+        ]
+      ],
+      "profiles": [
+        {
+          "anchors": [
+            [
+              "0",
+              450000
+            ],
+            [
+              "1",
+              5000000
+            ]
+          ],
+          "id": "primary",
+          "importance": 8,
+          "required_rules": [
+            "funds"
+          ],
+          "severity": "Critical",
+          "weights": {
+            "extent": "1",
+            "reliability": "1"
+          },
+          "when": {}
+        },
+        {
+          "anchors": [
+            [
+              "0",
+              200000
+            ],
+            [
+              "1",
+              450000
+            ]
+          ],
+          "id": "restricted",
+          "importance": 5,
+          "required_rules": [
+            "restricted-funds"
+          ],
+          "severity": "High",
+          "weights": {
+            "extent": "1",
+            "reliability": "1"
+          },
+          "when": {}
+        },
+        {
+          "anchors": [
+            [
+              "0",
+              30000
+            ],
+            [
+              "1",
+              150000
+            ]
+          ],
+          "id": "induced",
+          "importance": 3,
+          "required_rules": [
+            "induction"
+          ],
+          "severity": "Medium",
+          "weights": {
+            "extent": "1",
+            "reliability": "1"
+          },
+          "when": {}
+        },
+        {
+          "anchors": [
+            [
+              "0",
+              450000
+            ],
+            [
+              "1",
+              5000000
+            ]
+          ],
+          "id": "silent-profile",
+          "importance": 8,
+          "required_rules": [
+            "silent"
+          ],
+          "severity": "Critical",
+          "weights": {
+            "extent": "1",
+            "reliability": "1"
+          },
+          "when": {}
+        },
+        {
+          "anchors": [
+            [
+              "0",
+              450000
+            ],
+            [
+              "1",
+              5000000
+            ]
+          ],
+          "id": "secondary",
+          "importance": 8,
+          "required_rules": [
+            "keys"
+          ],
+          "severity": "Critical",
+          "weights": {
+            "extent": "1",
+            "reliability": "1"
+          },
+          "when": {}
+        },
+        {
+          "anchors": [
+            [
+              "0",
+              200000
+            ],
+            [
+              "1",
+              450000
+            ]
+          ],
+          "id": "restricted-secret",
+          "importance": 5,
+          "required_rules": [
+            "restricted-keys"
+          ],
+          "severity": "High",
+          "weights": {
+            "extent": "1",
+            "reliability": "1"
+          },
+          "when": {}
+        },
+        {
+          "anchors": [
+            [
+              "0",
+              450000
+            ],
+            [
+              "1",
+              5000000
+            ]
+          ],
+          "id": "combined",
+          "importance": 8,
+          "required_rules": [
+            "funds",
+            "keys"
+          ],
+          "severity": "Critical",
+          "weights": {
+            "extent": "1",
+            "reliability": "1"
+          },
+          "when": {
+            "combination_validated": true
+          }
+        }
+      ],
+      "rules": [
+        {
+          "group": "authorization",
+          "id": "funds",
+          "severity": "Critical",
+          "when": {
+            "restricted_path": false,
+            "unauthorized_fund_effect": true
+          }
+        },
+        {
+          "group": "authorization",
+          "id": "restricted-funds",
+          "severity": "High",
+          "when": {
+            "restricted_path": true,
+            "unauthorized_fund_effect": true
+          }
+        },
+        {
+          "group": "authorization",
+          "id": "induction",
+          "severity": "Medium",
+          "when": {
+            "induced_signature": true
+          }
+        },
+        {
+          "group": "authorization",
+          "id": "silent",
+          "severity": "Critical",
+          "when": {
+            "silent_signing": true
+          }
+        },
+        {
+          "group": "secrets",
+          "id": "keys",
+          "severity": "Critical",
+          "when": {
+            "key_exfiltration": true,
+            "restricted_keys": false
+          }
+        },
+        {
+          "group": "secrets",
+          "id": "restricted-keys",
+          "severity": "High",
+          "when": {
+            "key_exfiltration": true,
+            "restricted_keys": true
+          }
+        }
+      ],
+      "version": "SYNTHETIC-PUBLIC-1.3"
+    },
+    "governance": {
+      "submission_options": [
+        {
+          "id": "withdrawal_manipulation",
+          "label": "DApp initiates or alters withdrawals without authorization",
+          "rule_ids": [
+            "funds"
+          ],
+          "evidence_prompts": [
+            {
+              "id": "proof",
+              "prompt": "Compare the effect presented for approval with the actual authorised or signed effect.",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "restricted_withdrawal",
+          "label": "Unauthorized fund movement with additional prerequisites",
+          "rule_ids": [
+            "restricted-funds"
+          ],
+          "evidence_prompts": [
+            {
+              "id": "proof",
+              "prompt": "Identify the prerequisites, affected population and demonstrated fund effect.",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "induced_signature",
+          "label": "DApp induces the user to sign a transaction",
+          "rule_ids": [
+            "induction"
+          ],
+          "evidence_prompts": [
+            {
+              "id": "proof",
+              "prompt": "Show what the wallet displays, what the user approves, and the resulting effect.",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "silent_signing",
+          "label": "Transactions signed without user approval",
+          "rule_ids": [
+            "silent"
+          ],
+          "evidence_prompts": [
+            {
+              "id": "proof",
+              "prompt": "Demonstrate the absence of the required approval and the resulting signed effect.",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "key_exfiltration",
+          "label": "Unauthorized private-key disclosure without special restrictions",
+          "rule_ids": [
+            "keys"
+          ],
+          "evidence_prompts": [
+            {
+              "id": "proof",
+              "prompt": "Reference evidence of key disclosure and the actual prerequisites without including live secrets.",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "restricted_keys",
+          "label": "Key disclosure requiring additional prerequisites",
+          "rule_ids": [
+            "restricted-keys"
+          ],
+          "evidence_prompts": [
+            {
+              "id": "proof",
+              "prompt": "Describe the key-access boundary, restrictions and affected accounts.",
+              "required": true
+            }
+          ]
+        },
+        {
+          "id": "other",
+          "label": "Other / not listed",
+          "rule_ids": [],
+          "evidence_prompts": [
+            {
+              "id": "proof",
+              "prompt": "Describe the security boundary and demonstrated impact.",
+              "required": true
+            }
+          ]
+        }
+      ],
+      "estimation": {
+        "fact_defaults": {
+          "all_protocols_covered": false,
+          "combination_validated": false,
+          "fully_reliable": false,
+          "global_limit_example": false,
+          "induced_signature": false,
+          "key_exfiltration": false,
+          "no_effective_mitigation": false,
+          "no_user_interaction": false,
+          "profile_limit_example": false,
+          "restricted_keys": false,
+          "restricted_path": false,
+          "silent_signing": false,
+          "unauthorized_fund_effect": false
+        },
+        "option_facts": {},
+        "metric_bindings": {}
+      },
+      "award_adjustments": [
+        {
+          "id": "example-quality-adjustment",
+          "description": "Synthetic published quality adjustment; not a program recommendation",
+          "min_delta_minor_units": -100000,
+          "max_delta_minor_units": 100000
+        }
+      ]
+    },
+    "claims": [
+      {
+        "option_id": "withdrawal_manipulation",
+        "evidence": {
+          "proof": "Synthetic comparison evidence"
+        }
+      }
+    ],
+    "inputs": {
+      "core": [
+        4,
+        0,
+        0,
+        1
+      ],
+      "metrics": {
+        "primary": {
+          "extent": "0.6",
+          "reliability": "0.8"
+        }
+      }
+    }
+  },
+  "notice": "These are synthetic computations demonstrating states and recalculation, not a real report's recommended award."
+}

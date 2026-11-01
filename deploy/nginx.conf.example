@@ -1,0 +1,24 @@
+# Include in nginx http{}. Supply the real hostname and existing TLS files.
+limit_req_zone $binary_remote_addr zone=bemix_edge:10m rate=5r/s;
+server {
+    listen 443 ssl;
+    server_name decisions.example.org;
+    ssl_certificate /etc/letsencrypt/live/decisions.example.org/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/decisions.example.org/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    client_max_body_size 1m;
+    client_body_timeout 10s;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    location / {
+        limit_req zone=bemix_edge burst=20 nodelay;
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header Authorization $http_authorization;
+        proxy_set_header X-Forwarded-For "";
+        proxy_set_header X-Forwarded-Proto "";
+        proxy_connect_timeout 3s;
+        proxy_read_timeout 30s;
+        proxy_send_timeout 15s;
+        proxy_hide_header Server;
+    }
+}

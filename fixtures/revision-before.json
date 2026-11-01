@@ -1,0 +1,103 @@
+{
+  "schema_version": "bemix-policy-aware/1",
+  "report": {
+    "asset": "Wallet Extension / synthetic fixture",
+    "core": [
+      4,
+      0,
+      0,
+      1
+    ],
+    "core_reference": "SYNTHETIC: no real report has been adjudicated",
+    "currency": "USDC",
+    "eligibility": "accepted",
+    "eligibility_reference": "SYNTHETIC: no real report has been adjudicated",
+    "facts": {
+      "all_protocols_covered": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": false
+      },
+      "combination_validated": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": false
+      },
+      "fully_reliable": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": true
+      },
+      "global_limit_example": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": false
+      },
+      "induced_signature": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": true
+      },
+      "key_exfiltration": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": false
+      },
+      "no_effective_mitigation": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": null
+      },
+      "no_user_interaction": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": false
+      },
+      "profile_limit_example": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": false
+      },
+      "restricted_keys": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": false
+      },
+      "restricted_path": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": false
+      },
+      "silent_signing": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": false
+      },
+      "unauthorized_fund_effect": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": true
+      },
+      "wider_coverage": {
+        "reference": "SYNTHETIC: no real report has been adjudicated",
+        "value": false
+      }
+    },
+    "metrics": {
+      "primary": {
+        "extent": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "state": "demonstrated",
+          "value": "4/5"
+        },
+        "reliability": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "state": "demonstrated",
+          "value": "4/5"
+        }
+      },
+      "wider-profile": {
+        "extent": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "state": "demonstrated",
+          "value": "2/5"
+        },
+        "reliability": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "state": "demonstrated",
+          "value": "2/5"
+        }
+      }
+    },
+    "policy_sha256": "742c736e02ad8ce5b54ee3d275f41640fd88f96de267bd2a8967d175e7db9bf7",
+    "policy_version": "SYNTHETIC-PRECEDENCE-COUNTEREXAMPLE-1",
+    "researcher_label": "Researcher's proposed name"
+  }
+}

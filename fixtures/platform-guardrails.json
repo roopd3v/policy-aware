@@ -1,0 +1,1736 @@
+{
+  "schema_version": "bemix-platform-guardrails/1",
+  "base_policy": {
+    "asset": "Wallet Extension / synthetic fixture",
+    "bands": {
+      "Critical": [
+        450000,
+        5000000
+      ],
+      "High": [
+        200000,
+        450000
+      ],
+      "Low": [
+        10000,
+        30000
+      ],
+      "Medium": [
+        30000,
+        150000
+      ]
+    },
+    "caps": [
+      {
+        "amount": 4090000,
+        "id": "EXPERIMENT-only-top-cap",
+        "mode": "unless_all",
+        "profiles": [],
+        "severities": [
+          "Critical"
+        ],
+        "when": {
+          "all_protocols_covered": true,
+          "fully_reliable": true,
+          "no_effective_mitigation": true,
+          "no_user_interaction": true
+        }
+      },
+      {
+        "amount": 3400000,
+        "id": "EXPERIMENT-only-global-34000",
+        "mode": "when_matches",
+        "profiles": [],
+        "severities": [
+          "Critical"
+        ],
+        "when": {
+          "global_limit_example": true
+        }
+      },
+      {
+        "amount": 2500000,
+        "id": "EXPERIMENT-only-profile-25000",
+        "mode": "when_matches",
+        "profiles": [
+          "primary"
+        ],
+        "severities": [
+          "Critical"
+        ],
+        "when": {
+          "profile_limit_example": true
+        }
+      }
+    ],
+    "currency": "USDC",
+    "experimental": true,
+    "favorable_facts": {
+      "all_protocols_covered": true,
+      "combination_validated": true,
+      "fully_reliable": true,
+      "global_limit_example": false,
+      "key_exfiltration": true,
+      "no_effective_mitigation": true,
+      "no_user_interaction": true,
+      "profile_limit_example": false,
+      "restricted_keys": false,
+      "restricted_path": false,
+      "silent_signing": true,
+      "unauthorized_fund_effect": true
+    },
+    "importance_influence": "1/5",
+    "importance_ranges": {
+      "Critical": [
+        8,
+        10
+      ],
+      "High": [
+        5,
+        7
+      ],
+      "Low": [
+        1,
+        2
+      ],
+      "Medium": [
+        3,
+        4
+      ]
+    },
+    "precedence": [
+      [
+        "funds",
+        "induction"
+      ],
+      [
+        "restricted-funds",
+        "induction"
+      ],
+      [
+        "silent",
+        "induction"
+      ]
+    ],
+    "profiles": [
+      {
+        "anchors": [
+          [
+            "0",
+            450000
+          ],
+          [
+            "1",
+            5000000
+          ]
+        ],
+        "id": "primary",
+        "importance": 8,
+        "required_rules": [
+          "funds"
+        ],
+        "severity": "Critical",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            200000
+          ],
+          [
+            "1",
+            450000
+          ]
+        ],
+        "id": "restricted",
+        "importance": 5,
+        "required_rules": [
+          "restricted-funds"
+        ],
+        "severity": "High",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            30000
+          ],
+          [
+            "1",
+            150000
+          ]
+        ],
+        "id": "induced",
+        "importance": 3,
+        "required_rules": [
+          "induction"
+        ],
+        "severity": "Medium",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            450000
+          ],
+          [
+            "1",
+            5000000
+          ]
+        ],
+        "id": "silent-profile",
+        "importance": 8,
+        "required_rules": [
+          "silent"
+        ],
+        "severity": "Critical",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            450000
+          ],
+          [
+            "1",
+            5000000
+          ]
+        ],
+        "id": "secondary",
+        "importance": 8,
+        "required_rules": [
+          "keys"
+        ],
+        "severity": "Critical",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            200000
+          ],
+          [
+            "1",
+            450000
+          ]
+        ],
+        "id": "restricted-secret",
+        "importance": 5,
+        "required_rules": [
+          "restricted-keys"
+        ],
+        "severity": "High",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            450000
+          ],
+          [
+            "1",
+            5000000
+          ]
+        ],
+        "id": "combined",
+        "importance": 8,
+        "required_rules": [
+          "funds",
+          "keys"
+        ],
+        "severity": "Critical",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {
+          "combination_validated": true
+        }
+      }
+    ],
+    "rules": [
+      {
+        "group": "authorization",
+        "id": "funds",
+        "severity": "Critical",
+        "when": {
+          "restricted_path": false,
+          "unauthorized_fund_effect": true
+        }
+      },
+      {
+        "group": "authorization",
+        "id": "restricted-funds",
+        "severity": "High",
+        "when": {
+          "restricted_path": true,
+          "unauthorized_fund_effect": true
+        }
+      },
+      {
+        "group": "authorization",
+        "id": "induction",
+        "severity": "Medium",
+        "when": {
+          "induced_signature": true
+        }
+      },
+      {
+        "group": "authorization",
+        "id": "silent",
+        "severity": "Critical",
+        "when": {
+          "silent_signing": true
+        }
+      },
+      {
+        "group": "secrets",
+        "id": "keys",
+        "severity": "Critical",
+        "when": {
+          "key_exfiltration": true,
+          "restricted_keys": false
+        }
+      },
+      {
+        "group": "secrets",
+        "id": "restricted-keys",
+        "severity": "High",
+        "when": {
+          "key_exfiltration": true,
+          "restricted_keys": true
+        }
+      }
+    ],
+    "version": "SYNTHETIC-PUBLIC-1.3"
+  },
+  "base_governance": {
+    "source_reference": "Synthetic source",
+    "calibration_reference": "Synthetic uncalibrated test fixture",
+    "precedence_reference": "Synthetic published rule ordering",
+    "rubrics": {
+      "primary": {
+        "extent": "Synthetic criterion definition; calibrate before any real adoption",
+        "reliability": "Synthetic criterion definition; calibrate before any real adoption"
+      },
+      "restricted": {
+        "extent": "Synthetic criterion definition; calibrate before any real adoption",
+        "reliability": "Synthetic criterion definition; calibrate before any real adoption"
+      },
+      "induced": {
+        "extent": "Synthetic criterion definition; calibrate before any real adoption",
+        "reliability": "Synthetic criterion definition; calibrate before any real adoption"
+      },
+      "silent-profile": {
+        "extent": "Synthetic criterion definition; calibrate before any real adoption",
+        "reliability": "Synthetic criterion definition; calibrate before any real adoption"
+      },
+      "secondary": {
+        "extent": "Synthetic criterion definition; calibrate before any real adoption",
+        "reliability": "Synthetic criterion definition; calibrate before any real adoption"
+      },
+      "restricted-secret": {
+        "extent": "Synthetic criterion definition; calibrate before any real adoption",
+        "reliability": "Synthetic criterion definition; calibrate before any real adoption"
+      },
+      "combined": {
+        "extent": "Synthetic criterion definition; calibrate before any real adoption",
+        "reliability": "Synthetic criterion definition; calibrate before any real adoption"
+      }
+    },
+    "submission_options": [
+      {
+        "id": "withdrawal_manipulation",
+        "label": "DApp initiates or alters withdrawals without authorization",
+        "rule_ids": [
+          "funds"
+        ],
+        "evidence_prompts": [
+          {
+            "id": "proof",
+            "prompt": "Compare the effect presented for approval with the actual authorised or signed effect.",
+            "required": true
+          }
+        ]
+      },
+      {
+        "id": "restricted_withdrawal",
+        "label": "Unauthorized fund movement with additional prerequisites",
+        "rule_ids": [
+          "restricted-funds"
+        ],
+        "evidence_prompts": [
+          {
+            "id": "proof",
+            "prompt": "Identify the prerequisites, affected population and demonstrated fund effect.",
+            "required": true
+          }
+        ]
+      },
+      {
+        "id": "induced_signature",
+        "label": "DApp induces the user to sign a transaction",
+        "rule_ids": [
+          "induction"
+        ],
+        "evidence_prompts": [
+          {
+            "id": "proof",
+            "prompt": "Show what the wallet displays, what the user approves, and the resulting effect.",
+            "required": true
+          }
+        ]
+      },
+      {
+        "id": "silent_signing",
+        "label": "Transactions signed without user approval",
+        "rule_ids": [
+          "silent"
+        ],
+        "evidence_prompts": [
+          {
+            "id": "proof",
+            "prompt": "Demonstrate the absence of the required approval and the resulting signed effect.",
+            "required": true
+          }
+        ]
+      },
+      {
+        "id": "key_exfiltration",
+        "label": "Unauthorized private-key disclosure without special restrictions",
+        "rule_ids": [
+          "keys"
+        ],
+        "evidence_prompts": [
+          {
+            "id": "proof",
+            "prompt": "Reference evidence of key disclosure and the actual prerequisites without including live secrets.",
+            "required": true
+          }
+        ]
+      },
+      {
+        "id": "restricted_keys",
+        "label": "Key disclosure requiring additional prerequisites",
+        "rule_ids": [
+          "restricted-keys"
+        ],
+        "evidence_prompts": [
+          {
+            "id": "proof",
+            "prompt": "Describe the key-access boundary, restrictions and affected accounts.",
+            "required": true
+          }
+        ]
+      },
+      {
+        "id": "other",
+        "label": "Other / not listed",
+        "rule_ids": [],
+        "evidence_prompts": [
+          {
+            "id": "proof",
+            "prompt": "Describe the security boundary and demonstrated impact.",
+            "required": true
+          }
+        ]
+      }
+    ],
+    "estimation": {
+      "fact_defaults": {
+        "all_protocols_covered": false,
+        "combination_validated": false,
+        "fully_reliable": false,
+        "global_limit_example": false,
+        "induced_signature": false,
+        "key_exfiltration": false,
+        "no_effective_mitigation": false,
+        "no_user_interaction": false,
+        "profile_limit_example": false,
+        "restricted_keys": false,
+        "restricted_path": false,
+        "silent_signing": false,
+        "unauthorized_fund_effect": false
+      },
+      "option_facts": {},
+      "metric_bindings": {}
+    },
+    "award_adjustments": [
+      {
+        "id": "example-quality-adjustment",
+        "description": "Synthetic published quality adjustment; not a program recommendation",
+        "min_delta_minor_units": -100000,
+        "max_delta_minor_units": 100000
+      }
+    ]
+  },
+  "context_weight_bounds": {
+    "primary": {
+      "extent": [
+        "1/2",
+        "2"
+      ],
+      "reliability": [
+        "1/2",
+        "2"
+      ]
+    },
+    "restricted": {
+      "extent": [
+        "1/2",
+        "2"
+      ],
+      "reliability": [
+        "1/2",
+        "2"
+      ]
+    },
+    "induced": {
+      "extent": [
+        "1/2",
+        "2"
+      ],
+      "reliability": [
+        "1/2",
+        "2"
+      ]
+    },
+    "silent-profile": {
+      "extent": [
+        "1/2",
+        "2"
+      ],
+      "reliability": [
+        "1/2",
+        "2"
+      ]
+    },
+    "secondary": {
+      "extent": [
+        "1/2",
+        "2"
+      ],
+      "reliability": [
+        "1/2",
+        "2"
+      ]
+    },
+    "restricted-secret": {
+      "extent": [
+        "1/2",
+        "2"
+      ],
+      "reliability": [
+        "1/2",
+        "2"
+      ]
+    },
+    "combined": {
+      "extent": [
+        "1/2",
+        "2"
+      ],
+      "reliability": [
+        "1/2",
+        "2"
+      ]
+    }
+  },
+  "profile_scenarios": {
+    "primary": {
+      "asset": "Wallet Extension / synthetic fixture",
+      "core": [
+        4,
+        0,
+        0,
+        1
+      ],
+      "core_reference": "SYNTHETIC: no real report has been adjudicated",
+      "currency": "USDC",
+      "eligibility": "accepted",
+      "eligibility_reference": "SYNTHETIC: no real report has been adjudicated",
+      "facts": {
+        "all_protocols_covered": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "combination_validated": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "fully_reliable": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "global_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "induced_signature": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "key_exfiltration": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_effective_mitigation": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_user_interaction": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "profile_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_keys": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_path": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "silent_signing": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "unauthorized_fund_effect": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        }
+      },
+      "metrics": {
+        "combined": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "induced": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "primary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted-secret": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "secondary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "silent-profile": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        }
+      },
+      "policy_sha256": "43b8fad19bc9495881928227533ec203d7479f5fc90501f329668d3f006f73c9",
+      "policy_version": "SYNTHETIC-PUBLIC-1.3",
+      "researcher_label": ""
+    },
+    "restricted": {
+      "asset": "Wallet Extension / synthetic fixture",
+      "core": [
+        4,
+        0,
+        0,
+        1
+      ],
+      "core_reference": "SYNTHETIC: no real report has been adjudicated",
+      "currency": "USDC",
+      "eligibility": "accepted",
+      "eligibility_reference": "SYNTHETIC: no real report has been adjudicated",
+      "facts": {
+        "all_protocols_covered": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "combination_validated": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "fully_reliable": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "global_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "induced_signature": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "key_exfiltration": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_effective_mitigation": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_user_interaction": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "profile_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_keys": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_path": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        },
+        "silent_signing": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "unauthorized_fund_effect": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        }
+      },
+      "metrics": {
+        "combined": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "induced": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "primary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted-secret": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "secondary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "silent-profile": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        }
+      },
+      "policy_sha256": "43b8fad19bc9495881928227533ec203d7479f5fc90501f329668d3f006f73c9",
+      "policy_version": "SYNTHETIC-PUBLIC-1.3",
+      "researcher_label": ""
+    },
+    "induced": {
+      "asset": "Wallet Extension / synthetic fixture",
+      "core": [
+        4,
+        0,
+        0,
+        1
+      ],
+      "core_reference": "SYNTHETIC: no real report has been adjudicated",
+      "currency": "USDC",
+      "eligibility": "accepted",
+      "eligibility_reference": "SYNTHETIC: no real report has been adjudicated",
+      "facts": {
+        "all_protocols_covered": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "combination_validated": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "fully_reliable": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "global_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "induced_signature": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        },
+        "key_exfiltration": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_effective_mitigation": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_user_interaction": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "profile_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_keys": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_path": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "silent_signing": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "unauthorized_fund_effect": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        }
+      },
+      "metrics": {
+        "combined": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "induced": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "primary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted-secret": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "secondary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "silent-profile": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        }
+      },
+      "policy_sha256": "43b8fad19bc9495881928227533ec203d7479f5fc90501f329668d3f006f73c9",
+      "policy_version": "SYNTHETIC-PUBLIC-1.3",
+      "researcher_label": ""
+    },
+    "silent-profile": {
+      "asset": "Wallet Extension / synthetic fixture",
+      "core": [
+        4,
+        0,
+        0,
+        1
+      ],
+      "core_reference": "SYNTHETIC: no real report has been adjudicated",
+      "currency": "USDC",
+      "eligibility": "accepted",
+      "eligibility_reference": "SYNTHETIC: no real report has been adjudicated",
+      "facts": {
+        "all_protocols_covered": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "combination_validated": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "fully_reliable": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "global_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "induced_signature": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "key_exfiltration": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_effective_mitigation": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_user_interaction": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "profile_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_keys": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_path": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "silent_signing": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        },
+        "unauthorized_fund_effect": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        }
+      },
+      "metrics": {
+        "combined": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "induced": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "primary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted-secret": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "secondary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "silent-profile": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        }
+      },
+      "policy_sha256": "43b8fad19bc9495881928227533ec203d7479f5fc90501f329668d3f006f73c9",
+      "policy_version": "SYNTHETIC-PUBLIC-1.3",
+      "researcher_label": ""
+    },
+    "secondary": {
+      "asset": "Wallet Extension / synthetic fixture",
+      "core": [
+        4,
+        0,
+        0,
+        1
+      ],
+      "core_reference": "SYNTHETIC: no real report has been adjudicated",
+      "currency": "USDC",
+      "eligibility": "accepted",
+      "eligibility_reference": "SYNTHETIC: no real report has been adjudicated",
+      "facts": {
+        "all_protocols_covered": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "combination_validated": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "fully_reliable": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "global_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "induced_signature": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "key_exfiltration": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        },
+        "no_effective_mitigation": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_user_interaction": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "profile_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_keys": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_path": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "silent_signing": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "unauthorized_fund_effect": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        }
+      },
+      "metrics": {
+        "combined": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "induced": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "primary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted-secret": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "secondary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "silent-profile": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        }
+      },
+      "policy_sha256": "43b8fad19bc9495881928227533ec203d7479f5fc90501f329668d3f006f73c9",
+      "policy_version": "SYNTHETIC-PUBLIC-1.3",
+      "researcher_label": ""
+    },
+    "restricted-secret": {
+      "asset": "Wallet Extension / synthetic fixture",
+      "core": [
+        4,
+        0,
+        0,
+        1
+      ],
+      "core_reference": "SYNTHETIC: no real report has been adjudicated",
+      "currency": "USDC",
+      "eligibility": "accepted",
+      "eligibility_reference": "SYNTHETIC: no real report has been adjudicated",
+      "facts": {
+        "all_protocols_covered": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "combination_validated": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "fully_reliable": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "global_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "induced_signature": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "key_exfiltration": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        },
+        "no_effective_mitigation": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_user_interaction": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "profile_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_keys": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        },
+        "restricted_path": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "silent_signing": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "unauthorized_fund_effect": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        }
+      },
+      "metrics": {
+        "combined": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "induced": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "primary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted-secret": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "secondary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "silent-profile": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        }
+      },
+      "policy_sha256": "43b8fad19bc9495881928227533ec203d7479f5fc90501f329668d3f006f73c9",
+      "policy_version": "SYNTHETIC-PUBLIC-1.3",
+      "researcher_label": ""
+    },
+    "combined": {
+      "asset": "Wallet Extension / synthetic fixture",
+      "core": [
+        4,
+        0,
+        0,
+        1
+      ],
+      "core_reference": "SYNTHETIC: no real report has been adjudicated",
+      "currency": "USDC",
+      "eligibility": "accepted",
+      "eligibility_reference": "SYNTHETIC: no real report has been adjudicated",
+      "facts": {
+        "all_protocols_covered": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "combination_validated": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        },
+        "fully_reliable": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "global_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "induced_signature": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "key_exfiltration": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        },
+        "no_effective_mitigation": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "no_user_interaction": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "profile_limit_example": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_keys": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "restricted_path": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "silent_signing": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": false
+        },
+        "unauthorized_fund_effect": {
+          "reference": "SYNTHETIC: no real report has been adjudicated",
+          "value": true
+        }
+      },
+      "metrics": {
+        "combined": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "induced": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "primary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "restricted-secret": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "secondary": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        },
+        "silent-profile": {
+          "extent": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          },
+          "reliability": {
+            "reference": "SYNTHETIC: no real report has been adjudicated",
+            "state": "demonstrated",
+            "value": "1/2"
+          }
+        }
+      },
+      "policy_sha256": "43b8fad19bc9495881928227533ec203d7479f5fc90501f329668d3f006f73c9",
+      "policy_version": "SYNTHETIC-PUBLIC-1.3",
+      "researcher_label": ""
+    }
+  },
+  "context_share_bounds": {
+    "primary": {
+      "extent": [
+        "1/4",
+        "3/4"
+      ],
+      "reliability": [
+        "1/4",
+        "3/4"
+      ]
+    },
+    "restricted": {
+      "extent": [
+        "1/4",
+        "3/4"
+      ],
+      "reliability": [
+        "1/4",
+        "3/4"
+      ]
+    },
+    "induced": {
+      "extent": [
+        "1/4",
+        "3/4"
+      ],
+      "reliability": [
+        "1/4",
+        "3/4"
+      ]
+    },
+    "silent-profile": {
+      "extent": [
+        "1/4",
+        "3/4"
+      ],
+      "reliability": [
+        "1/4",
+        "3/4"
+      ]
+    },
+    "secondary": {
+      "extent": [
+        "1/4",
+        "3/4"
+      ],
+      "reliability": [
+        "1/4",
+        "3/4"
+      ]
+    },
+    "restricted-secret": {
+      "extent": [
+        "1/4",
+        "3/4"
+      ],
+      "reliability": [
+        "1/4",
+        "3/4"
+      ]
+    },
+    "combined": {
+      "extent": [
+        "1/4",
+        "3/4"
+      ],
+      "reliability": [
+        "1/4",
+        "3/4"
+      ]
+    }
+  },
+  "version": "SYNTHETIC-LIMITS-e5562c97e219c23a"
+}

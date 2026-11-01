@@ -1,0 +1,337 @@
+{
+  "schema_version": "bemix-policy-aware/1",
+  "policy": {
+    "asset": "Wallet Extension / synthetic fixture",
+    "bands": {
+      "Critical": [
+        450000,
+        5000000
+      ],
+      "High": [
+        200000,
+        450000
+      ],
+      "Low": [
+        10000,
+        30000
+      ],
+      "Medium": [
+        30000,
+        150000
+      ]
+    },
+    "caps": [
+      {
+        "amount": 4090000,
+        "id": "EXPERIMENT-only-top-cap",
+        "mode": "unless_all",
+        "profiles": [],
+        "severities": [
+          "Critical"
+        ],
+        "when": {
+          "all_protocols_covered": true,
+          "fully_reliable": true,
+          "no_effective_mitigation": true,
+          "no_user_interaction": true
+        }
+      },
+      {
+        "amount": 3400000,
+        "id": "EXPERIMENT-only-global-34000",
+        "mode": "when_matches",
+        "profiles": [],
+        "severities": [
+          "Critical"
+        ],
+        "when": {
+          "global_limit_example": true
+        }
+      },
+      {
+        "amount": 2500000,
+        "id": "EXPERIMENT-only-profile-25000",
+        "mode": "when_matches",
+        "profiles": [
+          "primary"
+        ],
+        "severities": [
+          "Critical"
+        ],
+        "when": {
+          "profile_limit_example": true
+        }
+      }
+    ],
+    "currency": "USDC",
+    "experimental": true,
+    "favorable_facts": {
+      "all_protocols_covered": true,
+      "combination_validated": true,
+      "fully_reliable": true,
+      "global_limit_example": false,
+      "key_exfiltration": true,
+      "no_effective_mitigation": true,
+      "no_user_interaction": true,
+      "profile_limit_example": false,
+      "restricted_keys": false,
+      "restricted_path": false,
+      "silent_signing": true,
+      "unauthorized_fund_effect": true
+    },
+    "importance_influence": "1/5",
+    "importance_ranges": {
+      "Critical": [
+        8,
+        10
+      ],
+      "High": [
+        5,
+        7
+      ],
+      "Low": [
+        1,
+        2
+      ],
+      "Medium": [
+        3,
+        4
+      ]
+    },
+    "precedence": [
+      [
+        "funds",
+        "induction"
+      ],
+      [
+        "restricted-funds",
+        "induction"
+      ],
+      [
+        "silent",
+        "induction"
+      ]
+    ],
+    "profiles": [
+      {
+        "anchors": [
+          [
+            "0",
+            450000
+          ],
+          [
+            "1",
+            5000000
+          ]
+        ],
+        "id": "primary",
+        "importance": 8,
+        "required_rules": [
+          "funds"
+        ],
+        "severity": "Critical",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            200000
+          ],
+          [
+            "1",
+            450000
+          ]
+        ],
+        "id": "restricted",
+        "importance": 5,
+        "required_rules": [
+          "restricted-funds"
+        ],
+        "severity": "High",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            30000
+          ],
+          [
+            "1",
+            150000
+          ]
+        ],
+        "id": "induced",
+        "importance": 3,
+        "required_rules": [
+          "induction"
+        ],
+        "severity": "Medium",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            450000
+          ],
+          [
+            "1",
+            5000000
+          ]
+        ],
+        "id": "silent-profile",
+        "importance": 8,
+        "required_rules": [
+          "silent"
+        ],
+        "severity": "Critical",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            450000
+          ],
+          [
+            "1",
+            5000000
+          ]
+        ],
+        "id": "secondary",
+        "importance": 8,
+        "required_rules": [
+          "keys"
+        ],
+        "severity": "Critical",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            200000
+          ],
+          [
+            "1",
+            450000
+          ]
+        ],
+        "id": "restricted-secret",
+        "importance": 5,
+        "required_rules": [
+          "restricted-keys"
+        ],
+        "severity": "High",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {}
+      },
+      {
+        "anchors": [
+          [
+            "0",
+            450000
+          ],
+          [
+            "1",
+            5000000
+          ]
+        ],
+        "id": "combined",
+        "importance": 8,
+        "required_rules": [
+          "funds",
+          "keys"
+        ],
+        "severity": "Critical",
+        "weights": {
+          "extent": "1",
+          "reliability": "1"
+        },
+        "when": {
+          "combination_validated": true
+        }
+      }
+    ],
+    "rules": [
+      {
+        "group": "authorization",
+        "id": "funds",
+        "severity": "Critical",
+        "when": {
+          "restricted_path": false,
+          "unauthorized_fund_effect": true
+        }
+      },
+      {
+        "group": "authorization",
+        "id": "restricted-funds",
+        "severity": "High",
+        "when": {
+          "restricted_path": true,
+          "unauthorized_fund_effect": true
+        }
+      },
+      {
+        "group": "authorization",
+        "id": "induction",
+        "severity": "Medium",
+        "when": {
+          "induced_signature": true
+        }
+      },
+      {
+        "group": "authorization",
+        "id": "silent",
+        "severity": "Critical",
+        "when": {
+          "silent_signing": true
+        }
+      },
+      {
+        "group": "secrets",
+        "id": "keys",
+        "severity": "Critical",
+        "when": {
+          "key_exfiltration": true,
+          "restricted_keys": false
+        }
+      },
+      {
+        "group": "secrets",
+        "id": "restricted-keys",
+        "severity": "High",
+        "when": {
+          "key_exfiltration": true,
+          "restricted_keys": true
+        }
+      }
+    ],
+    "version": "SYNTHETIC-PUBLIC-1.3"
+  }
+}

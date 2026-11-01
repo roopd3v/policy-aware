@@ -1,0 +1,26 @@
+{
+  "asset": "Wallet Extension / synthetic fixture",
+  "summary": "Synthetic demonstration of a claimed unauthorized fund effect",
+  "claims": [
+    {
+      "option_id": "withdrawal_manipulation",
+      "evidence": {
+        "proof": "Synthetic report section 2: displayed effect versus signed effect"
+      }
+    }
+  ],
+  "inputs": {
+    "core": [
+      4,
+      0,
+      0,
+      1
+    ],
+    "metrics": {
+      "primary": {
+        "extent": "0.6",
+        "reliability": "0.8"
+      }
+    }
+  }
+}

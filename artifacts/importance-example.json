@@ -1,0 +1,67 @@
+{
+  "synthetic": true,
+  "official_program_calibration": false,
+  "currency": "USDC",
+  "importance_ranges": {
+    "Critical": [
+      8,
+      10
+    ],
+    "High": [
+      5,
+      7
+    ],
+    "Low": [
+      1,
+      2
+    ],
+    "Medium": [
+      3,
+      4
+    ]
+  },
+  "importance_influence": "1/5",
+  "notice": "Hypothetical program priorities with equal contextual inputs, not official Bitget rankings or real report assessments.",
+  "comparisons": [
+    {
+      "illustrative_impact_label": "RCE via Extension",
+      "importance": 10,
+      "severity": "Critical",
+      "bemix_score": 17,
+      "context_Q": "3/5",
+      "importance_position": "1",
+      "reward_position": "81/125",
+      "amount": "33984.00"
+    },
+    {
+      "illustrative_impact_label": "Private Key Exfiltration",
+      "importance": 9,
+      "severity": "Critical",
+      "bemix_score": 17,
+      "context_Q": "3/5",
+      "importance_position": "1/2",
+      "reward_position": "78/125",
+      "amount": "32892.00"
+    },
+    {
+      "illustrative_impact_label": "Silent Transaction Signing",
+      "importance": 9,
+      "severity": "Critical",
+      "bemix_score": 17,
+      "context_Q": "3/5",
+      "importance_position": "1/2",
+      "reward_position": "78/125",
+      "amount": "32892.00"
+    },
+    {
+      "illustrative_impact_label": "DApp-Induced Withdrawal Manipulation",
+      "importance": 8,
+      "severity": "Critical",
+      "bemix_score": 17,
+      "context_Q": "3/5",
+      "importance_position": "0",
+      "reward_position": "3/5",
+      "amount": "31800.00"
+    }
+  ]
+}

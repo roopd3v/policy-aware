@@ -1,0 +1,128 @@
+{
+  "synthetic": true,
+  "official_program_calibration": false,
+  "currency": "USDC",
+  "scope": {
+    "asset": "Wallet Extension / synthetic fixture",
+    "policy_version": "SYNTHETIC-PUBLIC-1.3"
+  },
+  "weights": {
+    "extent": "1",
+    "reliability": "1"
+  },
+  "band": {
+    "minimum": "4500.00",
+    "maximum": "50000.00"
+  },
+  "states": [
+    {
+      "stage": "Estimated Bounty",
+      "basis": "researcher_declared",
+      "facts_validated": false,
+      "E": 4,
+      "D": 0,
+      "O": 0,
+      "X": 1,
+      "bemix_score": 17,
+      "policy_category": "Critical",
+      "extent": "0.6",
+      "reliability": "0.8",
+      "Q": "7/10",
+      "amount": "36350.00"
+    },
+    {
+      "stage": "Validated Bounty",
+      "basis": "synthetic_triager_correction",
+      "facts_validated": "assumed_for_example",
+      "bemix_score": 17,
+      "policy_category": "Critical",
+      "extent": "0.6",
+      "reliability": "0.6",
+      "Q": "3/5",
+      "amount": "31800.00",
+      "reason": "Reliability corrected from 0.8 to 0.6"
+    },
+    {
+      "stage": "Final Award",
+      "basis": "synthetic_program_confirmation",
+      "calculated_bounty": "31800.00",
+      "adjustment": "500.00",
+      "adjustment_rule": "example-quality-adjustment",
+      "amount": "32300.00",
+      "bemix_score_unchanged": 17,
+      "payment_executed": false
+    }
+  ],
+  "notice": "These are synthetic computations demonstrating states and recalculation, not a real report's recommended award.",
+  "importance_comparison": {
+    "synthetic": true,
+    "official_program_calibration": false,
+    "currency": "USDC",
+    "importance_ranges": {
+      "Critical": [
+        8,
+        10
+      ],
+      "High": [
+        5,
+        7
+      ],
+      "Low": [
+        1,
+        2
+      ],
+      "Medium": [
+        3,
+        4
+      ]
+    },
+    "importance_influence": "1/5",
+    "notice": "Hypothetical program priorities with equal contextual inputs, not official Bitget rankings or real report assessments.",
+    "comparisons": [
+      {
+        "illustrative_impact_label": "RCE via Extension",
+        "importance": 10,
+        "severity": "Critical",
+        "bemix_score": 17,
+        "context_Q": "3/5",
+        "importance_position": "1",
+        "reward_position": "81/125",
+        "amount": "33984.00"
+      },
+      {
+        "illustrative_impact_label": "Private Key Exfiltration",
+        "importance": 9,
+        "severity": "Critical",
+        "bemix_score": 17,
+        "context_Q": "3/5",
+        "importance_position": "1/2",
+        "reward_position": "78/125",
+        "amount": "32892.00"
+      },
+      {
+        "illustrative_impact_label": "Silent Transaction Signing",
+        "importance": 9,
+        "severity": "Critical",
+        "bemix_score": 17,
+        "context_Q": "3/5",
+        "importance_position": "1/2",
+        "reward_position": "78/125",
+        "amount": "32892.00"
+      },
+      {
+        "illustrative_impact_label": "DApp-Induced Withdrawal Manipulation",
+        "importance": 8,
+        "severity": "Critical",
+        "bemix_score": 17,
+        "context_Q": "3/5",
+        "importance_position": "0",
+        "reward_position": "3/5",
+        "amount": "31800.00"
+      }
+    ]
+  },
+  "reproduce": [
+    "python -m bemix_pilot.lifecycle_example",
+    "python -m bemix_pilot.platform_example"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "claims": [
+    {
+      "option_id": "withdrawal_manipulation",
+      "outcome": "confirmed",
+      "confirmed_option_ids": [
+        "withdrawal_manipulation"
+      ],
+      "reason": "Synthetic PoC conditions verified by the assigned triager"
+    }
+  ]
+}

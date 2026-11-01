@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+private/
+release/
+runtime/
+.venv/
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.key
+.env
+.env.*
+.ruff_cache/
+.pytest_cache/

@@ -1,0 +1,98 @@
+[
+  {
+    "id": "withdrawal_manipulation",
+    "label": "DApp initiates or alters withdrawals without authorization",
+    "rule_ids": [
+      "funds"
+    ],
+    "evidence_prompts": [
+      {
+        "id": "proof",
+        "prompt": "Compare the effect presented for approval with the actual authorised or signed effect.",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "restricted_withdrawal",
+    "label": "Unauthorized fund movement with additional prerequisites",
+    "rule_ids": [
+      "restricted-funds"
+    ],
+    "evidence_prompts": [
+      {
+        "id": "proof",
+        "prompt": "Identify the prerequisites, affected population and demonstrated fund effect.",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "induced_signature",
+    "label": "DApp induces the user to sign a transaction",
+    "rule_ids": [
+      "induction"
+    ],
+    "evidence_prompts": [
+      {
+        "id": "proof",
+        "prompt": "Show what the wallet displays, what the user approves, and the resulting effect.",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "silent_signing",
+    "label": "Transactions signed without user approval",
+    "rule_ids": [
+      "silent"
+    ],
+    "evidence_prompts": [
+      {
+        "id": "proof",
+        "prompt": "Demonstrate the absence of the required approval and the resulting signed effect.",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "key_exfiltration",
+    "label": "Unauthorized private-key disclosure without special restrictions",
+    "rule_ids": [
+      "keys"
+    ],
+    "evidence_prompts": [
+      {
+        "id": "proof",
+        "prompt": "Reference evidence of key disclosure and the actual prerequisites without including live secrets.",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "restricted_keys",
+    "label": "Key disclosure requiring additional prerequisites",
+    "rule_ids": [
+      "restricted-keys"
+    ],
+    "evidence_prompts": [
+      {
+        "id": "proof",
+        "prompt": "Describe the key-access boundary, restrictions and affected accounts.",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "other",
+    "label": "Other / not listed",
+    "rule_ids": [],
+    "evidence_prompts": [
+      {
+        "id": "proof",
+        "prompt": "Describe the security boundary and demonstrated impact.",
+        "required": true
+      }
+    ]
+  }
+]
