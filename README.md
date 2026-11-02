@@ -51,6 +51,7 @@ Program publication requests remain pending. Only the platform operator can appr
 - [Operations and deployment](docs/OPERATIONS.md)
 - [Security boundaries](docs/SECURITY.md)
 - [Verification record](artifacts/verification.json)
+- [Policy Aware Mathematical reference PDF](docs/BEMIX_Policy_Aware_1.3.0_Mathematical_Reference.pdf)
 
 Core code lives in `bemix_pilot/`; the persistent service is in `bemix_service/`.
 Tests cover the two independently. `fixtures/` and `artifacts/examples.json` contain reproducible synthetic examples. No real report, exploit, private program snapshot or production credentials are included.
